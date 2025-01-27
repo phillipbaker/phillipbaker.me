@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>Phillip Baker</title>
+	<atom:link href="https://phillipbaker.me/feed/" rel="self" type="application/rss+xml" />
+	<link>https://phillipbaker.me/</link>
+	<description>iOS Developer</description>
+	<lastBuildDate>Thu, 07 Mar 2024 14:37:37 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.7.1</generator>
+
+<image>
+	<url>https://phillipbaker.me/wp-content/uploads/2022/02/cropped-favicon-512x512-1-32x32.png</url>
+	<title>Phillip Baker</title>
+	<link>https://phillipbaker.me/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Migrating Critical Movies to a new API</title>
+		<link>https://phillipbaker.me/migrating-critical-movies-to-a-new-api/</link>
+		
+		<dc:creator><![CDATA[Phillip Baker]]></dc:creator>
+		<pubDate>Tue, 23 Jan 2024 14:53:16 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<guid isPermaLink="false">https://phillipbaker.me/?p=3900</guid>
+
+					<description><![CDATA[<p>The New York Times deprecated the Movie Reviews API that powered Critical Movies. I needed to migrate the app to a new API with a different response structure.</p>
+<p>The post <a href="https://phillipbaker.me/migrating-critical-movies-to-a-new-api/">Migrating Critical Movies to a new API</a> first appeared on <a href="https://phillipbaker.me/">Phillip Baker</a>.</p>]]></description>
+										<content:encoded><![CDATA[<p>The New York Times deprecated the Movie Reviews API that powered <a href="https://phillipbaker.me/critical-movies/" title>Critical Movies</a>. I needed to migrate the app to a new API with a different response structure.</p>
+
+
+
+<p>When I built the app, I modelled it with a single <code>Movie</code> type that decoded data and displayed it in the UI. This meant I would need to propagate any changes to the model throughout the app.</p>
+
+
+
+<p>I decided to use the migration as an opportunity to isolate the networking code. This would limit the impact of future API changes on the rest of the app.</p>
+
+
+
+<h2 class="wp-block-heading" style="margin-top:1rem;margin-bottom:0">Expected Changes</h2>
+
+
+
+<p>I would always expect to update code related to the endpoint and the network request. This includes constructing a new URL and decoding to new model types as necessary.</p>
+
+
+
+<p>In this case, I had to add parameters to target articles in the Movies section of the New York Times. And, of those, only articles that were movie reviews. I also updated the parameters for pagination and sort order. The pagination logic had changed with the new API. Results in reverse chronological order had come for free before.</p>
+
+
+
+<h2 class="wp-block-heading">Separating Models</h2>
+
+
+
+<p>I needed to update my models to decode data from the new API structure. To make the app more resilient to change, I created a new set of models and mapped them to the existing <code>Movie</code> type. </p>
+
+
+
+<p><code>Movie</code> became a flat model containing primitive data types ready for display in views. It retained <code>Hashable</code> conformance to work with <code>UICollectionView</code>. I was able to remove <code>Decodable</code> conformance, <code>Coding Keys</code>, and supporting data types. Instead, these live in the new models dedicated to handling the API response.</p>
+
+
+
+<p>Future changes to the API, or switching to a new data source, would mean updating data decoding models. But there would be no need for any other changes downstream.</p>
+
+
+
+<h2 class="wp-block-heading">Mapping Models</h2>
+
+
+
+<p>Below, I’ve described some of the mappings I made and places I was able to improve my own bad code.</p>
+
+
+
+<h3 class="wp-block-heading">Critic’s Picks</h3>
+
+
+
+<p>The old API returned a dedicated field for whether a movie was a Critic’s Pick. It was an <code>Int</code> returning 1 if a movie was a Critic’s Pick and 0 if it wasn’t. By separating the models, I was able map this property to a <code>Bool</code> and rename it <code>isCriticsPick</code>.</p>
+
+
+
+<p>This change kept the API logic in the networking layer. The caller no longer needed to test against an <code>Int</code> value it shouldn’t know exists. It insulated the call site from future API changes. As a bonus, the code is more readable calling <code>if movie.isCriticsPick { displayCriticsPickLabel() }</code>.</p>
+
+
+
+<h3 class="wp-block-heading">Date Formatting</h3>
+
+
+
+<p>With a single model, I passed the publication date straight through to the app’s views as a <code>String</code>. An extension on <code>String</code> converted it to a <code>Date</code> only to convert it back to a formatted <code>String</code>. Hilarious. Another API detail had found its way into places it shouldn’t have. </p>
+
+
+
+<p>The solution was to convert the incoming date <code>String</code> to a <code>Date</code> before passing it through to <code>Movie</code>. This insulated against future API changes and made the app more flexible. Data decoding and date formatting are now independent of one another. Date values can have different formats in different places in the app.</p>
+
+
+
+<h3 class="wp-block-heading">Mapping Bylines</h3>
+
+
+
+<p>The new API returns the article byline as a container. It includes a <code>String</code> for the byline as printed in the newspaper and an array authors with first and last names. I needed a single <code>String</code> byline.</p>
+
+
+
+<p>I took the more robust option of mapping over the array of authors. I combined first and last name pairs and joined them into a single comma-separated <code>String</code>.</p>
+
+
+
+<p>The other option was to use the print edition byline. I had to drop the first three letters to remove a prepended “by ” because I already provide a formatted “by” in the app. I started out using this method but&nbsp;<a href="https://github.com/phillipbaker/CriticalMovies/commit/4f2b20981d7bfc9c27c3f2f520b775ea952c6456" title>switched</a>&nbsp;to using the structured data. It protects against bylines containing errors or straying from this format.</p>
+
+
+
+<h3 class="wp-block-heading">Mapping Images</h3>
+
+
+
+<p>The new API response provides a large array of images for different screen sizes. The URL for each image is now only a path. I updated the existing Multimedia model I had used with the original, singular Movie. I mapped the largest image by width and construct a new URL string from the path.</p>
+
+
+
+<p>Using the largest image was a quick solution to ensure it could display at all the sizes I could need. The price was performance. I can see a lag before images appear in the app and I need to improve this in a future enhancement.</p>
+
+
+
+<h2 class="wp-block-heading">Final Thoughts</h2>
+
+
+
+<p>The app is better than before but despite the model mappings, it remains flat. The app pulls data in from an API and passes into view controllers without anything between. I would consider this all framework code. Adding any business logic would need another a layer between the network and view layers.</p><p>The post <a href="https://phillipbaker.me/migrating-critical-movies-to-a-new-api/">Migrating Critical Movies to a new API</a> first appeared on <a href="https://phillipbaker.me/">Phillip Baker</a>.</p>]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">3900</post-id>	</item>
+	</channel>
+</rss>

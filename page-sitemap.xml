@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This sitemap was dynamically generated on January 27, 2025 at 12:04 pm by All in One SEO v4.7.8 - the original SEO plugin for WordPress. -->
+
+<?xml-stylesheet type="text/xsl" href="/default-sitemap.xsl?sitemap=page"?>
+<urlset
+	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+	xmlns:xhtml="http://www.w3.org/1999/xhtml"
+	xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+>
+	<url>
+		<loc><![CDATA[/]]></loc>
+		<lastmod><![CDATA[2023-01-12T13:16:39+00:00]]></lastmod>
+		<changefreq><![CDATA[always]]></changefreq>
+		<priority><![CDATA[1]]></priority>
+	</url>
+	<url>
+		<loc><![CDATA[/critical-movies/]]></loc>
+		<lastmod><![CDATA[2024-03-25T21:04:43+00:00]]></lastmod>
+		<changefreq><![CDATA[weekly]]></changefreq>
+		<priority><![CDATA[0.7]]></priority>
+		<image:image>
+			<image:loc><![CDATA[https://phillipbaker.me/wp-content/uploads/2024/03/cm-iPhone-15-pro-portrait-cp-dune.png]]></image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc><![CDATA[/imperial-weather/]]></loc>
+		<lastmod><![CDATA[2024-03-25T21:03:15+00:00]]></lastmod>
+		<changefreq><![CDATA[weekly]]></changefreq>
+		<priority><![CDATA[0.7]]></priority>
+		<image:image>
+			<image:loc><![CDATA[https://phillipbaker.me/wp-content/uploads/2024/03/iw-iphone-15-pro-home-portrait-light-1.png]]></image:loc>
+		</image:image>
+		<image:image>
+			<image:loc><![CDATA[https://phillipbaker.me/wp-content/uploads/2024/03/current-hourly-dark.png]]></image:loc>
+		</image:image>
+		<image:image>
+			<image:loc><![CDATA[https://phillipbaker.me/wp-content/uploads/2024/03/current-weather-orientation-dark.png]]></image:loc>
+		</image:image>
+		<image:image>
+			<image:loc><![CDATA[https://phillipbaker.me/wp-content/uploads/2024/03/iw-error-message-location-permission-dark.png]]></image:loc>
+		</image:image>
+		<image:image>
+			<image:loc><![CDATA[https://phillipbaker.me/wp-content/uploads/2024/03/daily-weather-row-accessibility-dark.png]]></image:loc>
+		</image:image>
+		<image:image>
+			<image:loc><![CDATA[https://phillipbaker.me/wp-content/uploads/2024/03/iw-daily-weather-portrait-dark-spanish-sun.png]]></image:loc>
+		</image:image>
+	</url>
+</urlset>
