@@ -8,8 +8,8 @@
 	>
 
 <channel>
-	<title>Phillip Baker</title>
-	<atom:link href="/feed/" rel="self" type="application/rss+xml" />
+	<title>Uncategorized - Phillip Baker</title>
+	<atom:link href="/category/uncategorized/feed/" rel="self" type="application/rss+xml" />
 	<link>/</link>
 	<description>iOS Developer</description>
 	<lastBuildDate>Thu, 07 Mar 2024 14:37:37 +0000</lastBuildDate>
@@ -22,7 +22,7 @@
 
 <image>
 	<url>/wp-content/uploads/2022/02/cropped-favicon-512x512-1-32x32.png</url>
-	<title>Phillip Baker</title>
+	<title>Uncategorized - Phillip Baker</title>
 	<link>/</link>
 	<width>32</width>
 	<height>32</height>
