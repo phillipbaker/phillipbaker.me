@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US" prefix="og: https://ogp.me/ns#">
-<head>
-	<meta charset="UTF-8">
+<head><meta charset="UTF-8">
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
 	
-		<!-- All in One SEO 4.8.7.2 - aioseo.com -->
+		<!-- All in One SEO 4.9.0 - aioseo.com -->
 		<title>Migrating Critical Movies to a new API - Phillip Baker</title>
 	<meta name="description" content="The New York Times deprecated the Movie Reviews API that powered Critical Movies. I needed to migrate the app to a new API with a different response structure.">
 	<meta name="robots" content="max-image-preview:large">
 	<meta name="author" content="Phillip Baker">
 	<link rel="canonical" href="/migrating-critical-movies-to-a-new-api/">
-	<meta name="generator" content="All in One SEO (AIOSEO) 4.8.7.2">
+	<meta name="generator" content="All in One SEO (AIOSEO) 4.9.0">
 		<meta property="og:locale" content="en_US">
 		<meta property="og:site_name" content="Phillip Baker - iOS Developer">
 		<meta property="og:type" content="article">
@@ -31,8 +31,8 @@
 
 <link rel="dns-prefetch" href="//fonts.googleapis.com">
 <link rel="preconnect" href="//c0.wp.com">
-<link rel="alternate" type="application/rss+xml" title="Phillip Baker &raquo; Feed" href="/feed/">
-<link rel="alternate" type="application/rss+xml" title="Phillip Baker &raquo; Comments Feed" href="/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Phillip Baker » Feed" href="/feed/">
+<link rel="alternate" type="application/rss+xml" title="Phillip Baker » Comments Feed" href="/comments/feed/">
 <script>
 window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/svg\/","svgExt":".svg","source":{"concatemoji":"\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.8.3"}};
 /*! This file is auto-generated */
@@ -187,18 +187,18 @@ cssTarget={"Bodhi":"img.style-svg","ForceInlineSVG":"style-svg"};ForceInlineSVGA
 
 <div class="wp-block-group alignwide has-global-padding is-content-justification-center is-layout-constrained wp-block-group-is-layout-constrained" style="margin-top:var(--wp--preset--spacing--60)">
 
-<h1 style="margin-bottom:var(--wp--preset--spacing--40);" class="wp-block-post-title has-large-font-size">Migrating Critical Movies to a&nbsp;new API</h1>
+<h1 style="margin-bottom:var(--wp--preset--spacing--40);" class="wp-block-post-title has-large-font-size">Migrating Critical Movies to a new API</h1>
 
 <div class="entry-content wp-block-post-content has-global-padding is-layout-constrained wp-block-post-content-is-layout-constrained">
-<p>The New York Times deprecated the Movie Reviews API that powered <a href="/critical-movies/" title>Critical Movies</a>. I&nbsp;needed to migrate the app to a&nbsp;new API with a&nbsp;different response structure.</p>
+<p>The New York Times deprecated the Movie Reviews API that powered <a href="/critical-movies/" title>Critical Movies</a>. I needed to migrate the app to a new API with a different response structure.</p>
 
 
 
-<p>When I&nbsp;built the app, I&nbsp;modelled it with a&nbsp;single <code>Movie</code> type that decoded data and displayed it in the UI. This meant I&nbsp;would need to propagate any changes to the model throughout the&nbsp;app.</p>
+<p>When I built the app, I modelled it with a single <code>Movie</code> type that decoded data and displayed it in the UI. This meant I would need to propagate any changes to the model throughout the app.</p>
 
 
 
-<p>I decided to use the migration as an opportunity to isolate the networking code. This would limit the impact of future API changes on the rest of the&nbsp;app.</p>
+<p>I decided to use the migration as an opportunity to isolate the networking code. This would limit the impact of future API changes on the rest of the app.</p>
 
 
 
@@ -206,11 +206,11 @@ cssTarget={"Bodhi":"img.style-svg","ForceInlineSVG":"style-svg"};ForceInlineSVGA
 
 
 
-<p>I would always expect to update code related to the endpoint and the network request. This includes constructing a&nbsp;new URL and decoding to new model types as&nbsp;necessary.</p>
+<p>I would always expect to update code related to the endpoint and the network request. This includes constructing a new URL and decoding to new model types as necessary.</p>
 
 
 
-<p>In this case, I&nbsp;had to add parameters to target articles in the Movies section of the New York Times. And, of those, only articles that were movie reviews. I&nbsp;also updated the parameters for pagination and sort order. The pagination logic had changed with the new API. Results in reverse chronological order had come for free&nbsp;before.</p>
+<p>In this case, I had to add parameters to target articles in the Movies section of the New York Times. And, of those, only articles that were movie reviews. I also updated the parameters for pagination and sort order. The pagination logic had changed with the new API. Results in reverse chronological order had come for free before.</p>
 
 
 
@@ -218,15 +218,15 @@ cssTarget={"Bodhi":"img.style-svg","ForceInlineSVG":"style-svg"};ForceInlineSVGA
 
 
 
-<p>I needed to update my models to decode data from the new API structure. To make the app more resilient to change, I&nbsp;created a&nbsp;new set of models and mapped them to the existing <code>Movie</code> type.&nbsp;</p>
+<p>I needed to update my models to decode data from the new API structure. To make the app more resilient to change, I created a new set of models and mapped them to the existing <code>Movie</code> type. </p>
 
 
 
-<p><code>Movie</code> became a&nbsp;flat model containing primitive data types ready for display in views. It retained <code>Hashable</code> conformance to work with <code>UICollectionView</code>. I&nbsp;was able to remove <code>Decodable</code> conformance, <code>Coding Keys</code>, and supporting data types. Instead, these live in the new models dedicated to handling the API&nbsp;response.</p>
+<p><code>Movie</code> became a flat model containing primitive data types ready for display in views. It retained <code>Hashable</code> conformance to work with <code>UICollectionView</code>. I was able to remove <code>Decodable</code> conformance, <code>Coding Keys</code>, and supporting data types. Instead, these live in the new models dedicated to handling the API response.</p>
 
 
 
-<p>Future changes to the API, or switching to a&nbsp;new data source, would mean updating data decoding models. But there would be no need for any other changes downstream.</p>
+<p>Future changes to the API, or switching to a new data source, would mean updating data decoding models. But there would be no need for any other changes downstream.</p>
 
 
 
@@ -234,19 +234,19 @@ cssTarget={"Bodhi":"img.style-svg","ForceInlineSVG":"style-svg"};ForceInlineSVGA
 
 
 
-<p>Below, I&rsquo;ve described some of the mappings I&nbsp;made and places I&nbsp;was able to improve my own bad&nbsp;code.</p>
+<p>Below, I’ve described some of the mappings I made and places I was able to improve my own bad code.</p>
 
 
 
-<h3 class="wp-block-heading">Critic&rsquo;s Picks</h3>
+<h3 class="wp-block-heading">Critic’s Picks</h3>
 
 
 
-<p>The old API returned a&nbsp;dedicated field for whether a&nbsp;movie was a&nbsp;Critic&rsquo;s Pick. It was an <code>Int</code> returning 1&nbsp;if a&nbsp;movie was a&nbsp;Critic&rsquo;s Pick and 0&nbsp;if it wasn&rsquo;t. By separating the models, I&nbsp;was able map this property to a&nbsp;<code>Bool</code> and rename it <code>isCriticsPick</code>.</p>
+<p>The old API returned a dedicated field for whether a movie was a Critic’s Pick. It was an <code>Int</code> returning 1 if a movie was a Critic’s Pick and 0 if it wasn’t. By separating the models, I was able map this property to a <code>Bool</code> and rename it <code>isCriticsPick</code>.</p>
 
 
 
-<p>This change kept the API logic in the networking layer. The caller no longer needed to test against an <code>Int</code> value it shouldn&rsquo;t know exists. It insulated the call site from future API changes. As a&nbsp;bonus, the code is more readable calling <code>if movie.isCriticsPick { displayCriticsPickLabel() }</code>.</p>
+<p>This change kept the API logic in the networking layer. The caller no longer needed to test against an <code>Int</code> value it shouldn’t know exists. It insulated the call site from future API changes. As a bonus, the code is more readable calling <code>if movie.isCriticsPick { displayCriticsPickLabel() }</code>.</p>
 
 
 
@@ -254,11 +254,11 @@ cssTarget={"Bodhi":"img.style-svg","ForceInlineSVG":"style-svg"};ForceInlineSVGA
 
 
 
-<p>With a&nbsp;single model, I&nbsp;passed the publication date straight through to the app&rsquo;s views as a&nbsp;<code>String</code>. An extension on <code>String</code> converted it to a&nbsp;<code>Date</code> only to convert it back to a&nbsp;formatted <code>String</code>. Hilarious. Another API detail had found its way into places it shouldn&rsquo;t have.&nbsp;</p>
+<p>With a single model, I passed the publication date straight through to the app’s views as a <code>String</code>. An extension on <code>String</code> converted it to a <code>Date</code> only to convert it back to a formatted <code>String</code>. Hilarious. Another API detail had found its way into places it shouldn’t have. </p>
 
 
 
-<p>The solution was to convert the incoming date <code>String</code> to a&nbsp;<code>Date</code> before passing it through to <code>Movie</code>. This insulated against future API changes and made the app more flexible. Data decoding and date formatting are now independent of one another. Date values can have different formats in different places in the&nbsp;app.</p>
+<p>The solution was to convert the incoming date <code>String</code> to a <code>Date</code> before passing it through to <code>Movie</code>. This insulated against future API changes and made the app more flexible. Data decoding and date formatting are now independent of one another. Date values can have different formats in different places in the app.</p>
 
 
 
@@ -266,15 +266,15 @@ cssTarget={"Bodhi":"img.style-svg","ForceInlineSVG":"style-svg"};ForceInlineSVGA
 
 
 
-<p>The new API returns the article byline as a&nbsp;container. It includes a&nbsp;<code>String</code> for the byline as printed in the newspaper and an array authors with first and last names. I&nbsp;needed a&nbsp;single <code>String</code> byline.</p>
+<p>The new API returns the article byline as a container. It includes a <code>String</code> for the byline as printed in the newspaper and an array authors with first and last names. I needed a single <code>String</code> byline.</p>
 
 
 
-<p>I took the more robust option of mapping over the array of authors. I&nbsp;combined first and last name pairs and joined them into a&nbsp;single comma-separated <code>String</code>.</p>
+<p>I took the more robust option of mapping over the array of authors. I combined first and last name pairs and joined them into a single comma-separated <code>String</code>.</p>
 
 
 
-<p>The other option was to use the print edition byline. I&nbsp;had to drop the first three letters to remove a&nbsp;prepended &ldquo;by &rdquo; because I&nbsp;already provide a&nbsp;formatted &ldquo;by&rdquo; in the app. I&nbsp;started out using this method but&nbsp;<a href="https://github.com/phillipbaker/CriticalMovies/commit/4f2b20981d7bfc9c27c3f2f520b775ea952c6456" title>switched</a>&nbsp;to using the structured data. It protects against bylines containing errors or straying from this&nbsp;format.</p>
+<p>The other option was to use the print edition byline. I had to drop the first three letters to remove a prepended “by ” because I already provide a formatted “by” in the app. I started out using this method but <a href="https://github.com/phillipbaker/CriticalMovies/commit/4f2b20981d7bfc9c27c3f2f520b775ea952c6456" title>switched</a> to using the structured data. It protects against bylines containing errors or straying from this format.</p>
 
 
 
@@ -282,11 +282,11 @@ cssTarget={"Bodhi":"img.style-svg","ForceInlineSVG":"style-svg"};ForceInlineSVGA
 
 
 
-<p>The new API response provides a&nbsp;large array of images for different screen sizes. The URL for each image is now only a&nbsp;path. I&nbsp;updated the existing Multimedia model I&nbsp;had used with the original, singular Movie. I&nbsp;mapped the largest image by width and construct a&nbsp;new URL string from the&nbsp;path.</p>
+<p>The new API response provides a large array of images for different screen sizes. The URL for each image is now only a path. I updated the existing Multimedia model I had used with the original, singular Movie. I mapped the largest image by width and construct a new URL string from the path.</p>
 
 
 
-<p>Using the largest image was a&nbsp;quick solution to ensure it could display at all the sizes I&nbsp;could need. The price was performance. I&nbsp;can see a&nbsp;lag before images appear in the app and I&nbsp;need to improve this in a&nbsp;future enhancement.</p>
+<p>Using the largest image was a quick solution to ensure it could display at all the sizes I could need. The price was performance. I can see a lag before images appear in the app and I need to improve this in a future enhancement.</p>
 
 
 
@@ -294,7 +294,7 @@ cssTarget={"Bodhi":"img.style-svg","ForceInlineSVG":"style-svg"};ForceInlineSVGA
 
 
 
-<p>The app is better than before but despite the model mappings, it remains flat. The app pulls data in from an API and passes into view controllers without anything between. I&nbsp;would consider this all framework code. Adding any business logic would need another a&nbsp;layer between the network and view&nbsp;layers.</p>
+<p>The app is better than before but despite the model mappings, it remains flat. The app pulls data in from an API and passes into view controllers without anything between. I would consider this all framework code. Adding any business logic would need another a layer between the network and view layers.</p>
 </div>
 
 <div class="wp-block-template-part">
@@ -324,6 +324,7 @@ cssTarget={"Bodhi":"img.style-svg","ForceInlineSVG":"style-svg"};ForceInlineSVGA
 <script type="speculationrules">
 {"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/wp-content\/uploads\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/twentytwentythree-child\/*","\/wp-content\/themes\/twentytwentythree\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
 </script>
+<script type="module" src="/wp-content/plugins/all-in-one-seo-pack/dist/Lite/assets/table-of-contents.95d0dfce.js?ver=4.9.0" id="aioseo/js/src/vue/standalone/blocks/table-of-contents/frontend.js-js"></script>
 <script id="wp-block-template-skip-link-js-after">
 	( function() {
 		var skipLinkTarget = document.querySelector( 'main' ),
